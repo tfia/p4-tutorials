@@ -199,7 +199,7 @@ def addFlowRule( ingress_sw, src_ip_addr, dst_ip_addr, protocol, port, new_dscp,
             "new_dscp":       new_dscp,
             "dst_eth_addr":   dst_eth_addr
         },
-        # TODO: Add idle timeout
+        idle_timeout_ns=10 * NSEC_PER_SEC
         )
     ingress_sw.WriteTableEntry(table_entry)
 
@@ -266,7 +266,7 @@ def packetOutMetadataList(opcode, reserved1, operand0):
             {"value": operand0, "bitwidth": 32}]
 
 def sendPacketOut(sw ,payload, metadatas):
-    # TODO: Implement the function logic to send a packet-out message
+    sw.PacketOut(payload, metadatas)
 
 def readTableRules(p4info_helper, sw):
     """
